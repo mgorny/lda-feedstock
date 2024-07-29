@@ -1,5 +1,5 @@
 {% set name = "lda" %}
-{% set version = "2.0.0" %}
+{% set version = "3.0.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,16 +7,17 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d8d7c0bc42208902a9e34261b76793a84f59e6c69cfd7ca12ce982cdaf7c3020
+  sha256: 76fc6fbb066b6d1ec0360a1541c5e1c8b69a728666525e72644c4d5332fc778a
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py>=37]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
 
 
   host:
