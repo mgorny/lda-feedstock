@@ -1,37 +1,35 @@
 schema_version: 1
 
 context:
-  name: lda
   version: "3.0.2"
 
 package:
-  name: ${{ name|lower }}
+  name: lda
   version: ${{ version }}
 
 source:
-  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/l/lda/lda-${{ version }}.tar.gz
   sha256: 76fc6fbb066b6d1ec0360a1541c5e1c8b69a728666525e72644c4d5332fc778a
 
 build:
   number: 0
-  skip: match(python, ">=3.7")
-  script: ${{ PYTHON }} -m pip install . -vv
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
   host:
-    - pip
     - python
-    - numpy
-    - pbr
-    - setuptools
+    - poetry-core
     - cython
+    - meson
+    - ninja
+    - pip
+    - numpy
   run:
     - python
-    - ${{ pin_compatible('numpy') }}
-    - pbr
+    - numpy
 
 tests:
   - python:
@@ -39,12 +37,12 @@ tests:
         - lda
         - lda.datasets
         - lda.utils
-      pip_check: false
+      pip_check: true
 
 about:
+  summary: Topic modeling with latent Dirichlet allocation
   license: MPL-2.0
   license_file: LICENSE
-  summary: lda implements latent Dirichlet allocation (LDA) using collapsed Gibbs sampling. lda is fast and is tested on Linux, OS X, and Windows.
   homepage: https://lda.readthedocs.io/en/latest/
   repository: https://github.com/ariddell/lda/tree/master
   documentation: https://lda.readthedocs.io/en/latest/
