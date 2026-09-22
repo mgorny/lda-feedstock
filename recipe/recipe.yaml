@@ -10,10 +10,13 @@ package:
 source:
   url: https://pypi.org/packages/source/l/lda/lda-${{ version }}.tar.gz
   sha256: 76fc6fbb066b6d1ec0360a1541c5e1c8b69a728666525e72644c4d5332fc778a
+  patches:
+    - patches/meson-args.patch
 
 build:
   number: 0
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script:
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:

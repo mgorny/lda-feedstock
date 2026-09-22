@@ -1,0 +1,14 @@
+diff --git a/build.py b/build.py
+index 328daf1..e1e1d3c 100644
+--- a/build.py
++++ b/build.py
+@@ -30,7 +32,8 @@ def build():
+     """Build the project."""
+     _cleanup()
+ 
+-    _meson("setup", BUILD_DIR.as_posix())
++    import os
++    _meson("setup", *os.environ["MESON_ARGS"].split(), BUILD_DIR.as_posix())
+     _meson("compile", "-C", BUILD_DIR.as_posix())
+     _meson("install", "-C", BUILD_DIR.as_posix())
+ 
