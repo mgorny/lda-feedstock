@@ -46,6 +46,12 @@ tests:
         - lda.datasets
         - lda.utils
       pip_check: true
+  - requirements:
+      run:
+        - oslotest
+        - scipy
+    script:
+      - python -m unittest discover -b -v lda.tests
 
 about:
   summary: Topic modeling with latent Dirichlet allocation
